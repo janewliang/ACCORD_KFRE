@@ -1,0 +1,26 @@
+"Outcome","Quartile","Est","2.5%","97.5%"
+"Composite kidney outcome","Overall",48.4,25.34,69.6
+"Composite kidney outcome","1",10.14,-23.9,43.13
+"Composite kidney outcome","2",40.07,-4.65,84.7
+"Composite kidney outcome","3",50.08,7.95,92.69
+"Composite kidney outcome","4",114.77,58.14,176.41
+"Development of macro-albuminuria","Overall",42.49,22.52,61.31
+"Development of macro-albuminuria","1",10.99,-8.12,30.61
+"Development of macro-albuminuria","2",31.32,-4.86,68.63
+"Development of macro-albuminuria","3",33.46,-6.22,71.98
+"Development of macro-albuminuria","4",116.49,62.97,173.51
+"Renal failure or ESRD (dialysis) or SCr>3.3","Overall",5.43,-7.02,16.95
+"Renal failure or ESRD (dialysis) or SCr>3.3","1",-4.1,-30.36,19.86
+"Renal failure or ESRD (dialysis) or SCr>3.3","2",7.53,-14.43,31.42
+"Renal failure or ESRD (dialysis) or SCr>3.3","3",18.22,-3.14,39.3
+"Renal failure or ESRD (dialysis) or SCr>3.3","4",0.99,-27.6,27.66
+"All cause death","Overall",-23.64,-42.2,-6.64
+"All cause death","1",-21.03,-47.7,6.66
+"All cause death","2",-19.53,-53.51,12.56
+"All cause death","3",11.06,-20.23,42.14
+"All cause death","4",-56.7,-100.19,-17.5
+"Cardiovascular death","Overall",-15.43,-28.26,-3.57
+"Cardiovascular death","1",-17.82,-37.08,0.4
+"Cardiovascular death","2",-16.46,-40.91,4.34
+"Cardiovascular death","3",11.88,-12.68,39.15
+"Cardiovascular death","4",-35.01,-65.91,-5.41

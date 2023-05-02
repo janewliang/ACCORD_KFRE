@@ -1,0 +1,51 @@
+"Outcome","Decile","Est","2.5%","97.5%"
+"Composite kidney outcome",1,-12.9,-61.26,32.11
+"Composite kidney outcome",2,-71.92,-118.99,-22.45
+"Composite kidney outcome",3,-39.69,-107.56,15.23
+"Composite kidney outcome",4,-28.29,-102.44,41.62
+"Composite kidney outcome",5,26.1,-41.2,86.52
+"Composite kidney outcome",6,-7.74,-68.29,56.03
+"Composite kidney outcome",7,-28.58,-94.28,32.81
+"Composite kidney outcome",8,27.74,-41.41,98.84
+"Composite kidney outcome",9,68.68,-2.81,150.4
+"Composite kidney outcome",10,118.15,11.23,232.1
+"Development of macro-albuminuria",1,-23.6,-51.8,2.42
+"Development of macro-albuminuria",2,-41.52,-72.46,-7.63
+"Development of macro-albuminuria",3,-41.8,-89.53,4.41
+"Development of macro-albuminuria",4,-33.68,-90.49,25.05
+"Development of macro-albuminuria",5,23.68,-35.9,79.58
+"Development of macro-albuminuria",6,-20.8,-77.63,36.38
+"Development of macro-albuminuria",7,-44.7,-102.4,12.97
+"Development of macro-albuminuria",8,33.8,-31.43,97.58
+"Development of macro-albuminuria",9,81.06,12.61,155.53
+"Development of macro-albuminuria",10,124.24,18.35,238.2
+"Renal failure or ESRD (dialysis) or SCr>3.3",1,7.36,-31.3,43.9
+"Renal failure or ESRD (dialysis) or SCr>3.3",2,-37.51,-72.18,-4.79
+"Renal failure or ESRD (dialysis) or SCr>3.3",3,7.21,-33.7,46.82
+"Renal failure or ESRD (dialysis) or SCr>3.3",4,7.86,-31.76,50.35
+"Renal failure or ESRD (dialysis) or SCr>3.3",5,-3.52,-31.38,26.2
+"Renal failure or ESRD (dialysis) or SCr>3.3",6,18.91,-13.7,53.74
+"Renal failure or ESRD (dialysis) or SCr>3.3",7,8.14,-23.65,37.52
+"Renal failure or ESRD (dialysis) or SCr>3.3",8,-10.6,-48.28,28.83
+"Renal failure or ESRD (dialysis) or SCr>3.3",9,-4.42,-32.54,22.22
+"Renal failure or ESRD (dialysis) or SCr>3.3",10,5.38,-41.88,57.68
+"All cause death",1,47.45,12.51,82.73
+"All cause death",2,-34.2,-83.89,20.44
+"All cause death",3,15.15,-33.06,62.04
+"All cause death",4,3.11,-47.17,56.46
+"All cause death",5,-14.72,-68.1,27.66
+"All cause death",6,71.35,25.75,115.58
+"All cause death",7,-8.79,-58.82,44.69
+"All cause death",8,-36.03,-91.25,20.33
+"All cause death",9,-18.52,-70.92,32.59
+"All cause death",10,-4.22,-69.41,58.15
+"Cardiovascular death",1,20.57,0.95,42
+"Cardiovascular death",2,-12.87,-50.65,28.57
+"Cardiovascular death",3,3.25,-29.87,34.99
+"Cardiovascular death",4,-5.54,-41.36,33.2
+"Cardiovascular death",5,-13,-49.17,17.93
+"Cardiovascular death",6,46.88,11,84.01
+"Cardiovascular death",7,13.3,-23.09,51.78
+"Cardiovascular death",8,-35.95,-76.1,10.6
+"Cardiovascular death",9,-7.96,-48.73,29.62
+"Cardiovascular death",10,0.19,-48.58,49.38
