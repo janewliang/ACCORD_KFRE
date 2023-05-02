@@ -10,7 +10,7 @@ This repository contains code to reproduce the results presented in the paper
 - Parellelization: [`foreach`](https://cran.r-project.org/web/packages/foreach/index.html) and [`doParallel`](https://cran.r-project.org/web/packages/doParallel/index.html)
 
 ## Data
-- Action to Control Cardiovascular Risk in Diabetes (ACCORD) study data<sup>[1](#myfootnote1), 2](#myfootnote2)</sup>
+- Action to Control Cardiovascular Risk in Diabetes (ACCORD) study data<sup>[1](#myfootnote1), [2](#myfootnote2)</sup>
 
 ---
 
