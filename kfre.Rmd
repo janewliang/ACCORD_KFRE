@@ -1,8 +1,8 @@
 ---
 title: "Heterogeneous treatment effects of intensive glycemic control on kidney microvascular outcomes in ACCORD"
-author: "Vivek Charu, Jane W. Liang, Glenn M. Chertow, June Li, Maria E. Montez-Rath, Pascal Geldsetzer, Ian de Boer, Lu Tian, and Manjula Kurella Tamura"
+author: "Vivek Charu, Jane W. Liang, Glenn M. Chertow, Zhuo Jun Li, Maria E. Montez-Rath, Pascal Geldsetzer, Ian H. de Boer, Lu Tian, and Manjula Kurella Tamura"
 output: html_document
-date: "2023-05-16"
+date: "2023-06-06"
 ---
 
 ```{r setup, include=FALSE}
@@ -35,9 +35,19 @@ We read in the data and extract the outcome and covariate variables of interest.
 
 ```{r}
 # Read in datasets
+# Raw data
 raw_data = read.csv("/Users/jliang/Library/CloudStorage/Box-Box/Jane-Vivek/ACCORD HTE Analysis/Data/New data 26SEP2022/accordall.csv", header = TRUE)
+
+# Additional outcomes
 other_df = read.csv("/Users/jliang/Library/CloudStorage/Box-Box/Jane-Vivek/ACCORD HTE Analysis/Data/ACCORD_GLY_NEWOUTCOMES-2.csv", header = TRUE)
 hypo_df = read.csv("/Users/jliang/Library/CloudStorage/Box-Box/RELATE\ CKD/Study\ Datasets/ACCORD/ACCORD_2017b_2\ 2/Main_Study/3-Data_Sets-Analysis/3a-Analysis_Data_Sets/csv/hypoglycemiatime1st.csv")
+
+# Concomitant medications
+meds_df = read.csv("/Users/jliang/Library/CloudStorage/Box-Box/RELATE\ CKD/Study\ Datasets/ACCORD/ACCORD_2017b_2\ 2/Main_Study/3-Data_Sets-Analysis/3a-Analysis_Data_Sets/csv/concomitantmeds.csv")
+# Classification groups for medication
+meds_groups_df = read.csv("Copy of Meds_ACCORD.csv")[,1:2]
+names(meds_groups_df) = c("med", "group")
+
 
 # Subset for death outcomes
 other_df = other_df %>%
@@ -48,10 +58,34 @@ hypo_df = hypo_df %>%
          hypoglycemia_fu = 365 * fuyrs_any) %>% 
   select(maskid = MaskID, hypoglycemia, hypoglycemia_fu)
 
-# Merge in death outcome
+# Use friendlier variable names
+meds_groups_df = meds_groups_df %>% 
+  filter(group != "") %>% 
+  mutate(group = recode(group, "anti-htn" = "anti_htn", 
+                        "chol lowering" = "chol_lowering", 
+                        "oral DM" = "oral_DM"))
+# Convert data frame of classification groups to list
+con_meds = sort(unique(meds_groups_df$group))
+meds_groups_list = sapply(con_meds, function(x) {
+  meds_groups_df$med[meds_groups_df$group == x]
+})
+# Only consider baseline meds
+meds_df = meds_df %>% filter(Visit == "BLR")
+# Create a new variable for each con med classification group
+for (med in con_meds) {
+  meds_df[[med]] = 
+    rowSums(meds_df[,meds_groups_list[[med]]], na.rm = TRUE) > 0
+}
+
+
+# Merge in death outcomes
 raw_data = merge(raw_data, other_df, by = "maskid", all.x = TRUE)
 # Merge in 1st assisted hypoglycemic event
 raw_data = merge(raw_data, hypo_df, by = "maskid", all.x = TRUE)
+# Merge in con meds
+raw_data = merge(raw_data %>% select(!diuretic), 
+                 meds_df %>% select(maskid = MaskID, all_of(con_meds)), 
+                 by = "maskid", all.x = TRUE)
 
 # Create composite kidney outcome
 raw_data$neph_composite = pmax(raw_data$Neph2, raw_data$Neph3)
@@ -66,7 +100,8 @@ subset_quant = c("female", "baseline_age", "raceth",
                  "ualb", "ucreat", "uacr", 
                  "ckd2021GFR", "screat", 
                  "bmi", 
-                 "smokelif") # Add smoking to calculate DKD score)
+                 "smokelif", 
+                 con_meds)
 
 # List of outcome variables 
 outcome_list = list(
@@ -241,6 +276,11 @@ dat_dict = data.frame(rbind(
   c("uacr", "Urinary albumin to creatinine ratio", "(mg/g)"), 
   c("ckd2021GFR", "Estimated glomerular filtration rate", "(mL/min/1.73m2)"), 
   c("screat", "Serum creatinine", "(mg/dL)"),  
+  c("anti_htn", "Anti-hypertension medication", "(yes/no)"), 
+  c("chol_lowering", "Cholesterol-lowering medication", "(yes/no)"), 
+  c("diuretic", "Diuretic medication", "(yes/no)"), 
+  c("insulin", "Insulin", "(yes/no)"), 
+  c("oral_DM", "Oral diabetes medication", "(yes/no)"), 
   c("neph_composite", "Composite kidney outcome", "(yes/no)"), 
   c("Neph2", "Development of macro-albuminuria", "(yes/no)"), 
   c("Neph3", "Renal failure or ESRD (dialysis) or SCr>3.3", "(yes/no)"), 
@@ -255,9 +295,9 @@ center_tab = cbind(
   # Overall
   sapply(c(expanded_covariates, names(outcome_list)), function(var) {
     if (var %in% c("glyarm", names(outcome_list), 
-                   "female", paste0("raceth", 0:3))) { # Binary variables
+                   names(binary_vars)[binary_vars])) { # Binary variables
       mean(df[,var], na.rm = TRUE)
-    } else { # Continuous'
+    } else { # Continuous
       median(df[,var], na.rm = TRUE)
     }
   }), 
@@ -265,7 +305,7 @@ center_tab = cbind(
   sapply(1:4, function(i) {
     sapply(c(expanded_covariates, names(outcome_list)), function(var) {
       if (var %in% c("glyarm", names(outcome_list), 
-                     "female", paste0("raceth", 0:3))) { # Binary variables
+                     names(binary_vars)[binary_vars])) { # Binary variables
         mean(df[df$kfre_quarts==i,var], na.rm = TRUE)
       } else { # Continuous
         median(df[df$kfre_quarts==i,var], na.rm = TRUE)
@@ -279,7 +319,7 @@ spread_tab = cbind(
   # Overall
   sapply(c(expanded_covariates, names(outcome_list)), function(var) {
     if (var %in% c("glyarm", names(outcome_list), 
-                   "female", paste0("raceth", 0:3))) { # Binary variables
+                   names(binary_vars)[binary_vars])) { # Binary variables
       sd(df[,var], na.rm = TRUE)
     } else { # Continuous
       IQR(df[,var], na.rm = TRUE)
@@ -289,7 +329,7 @@ spread_tab = cbind(
   sapply(1:4, function(i){
     sapply(c(expanded_covariates, names(outcome_list)), function(var) {
       if (var %in% c("glyarm", names(outcome_list), 
-                     "female", paste0("raceth", 0:3))) { # Binary variables
+                     names(binary_vars)[binary_vars])) { # Binary variables
         sd(df[df$kfre_quarts==i,var], na.rm = TRUE)
       } else { # Continuous
         IQR(df[df$kfre_quarts==i,var], na.rm = TRUE)

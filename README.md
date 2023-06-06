@@ -2,7 +2,7 @@
 
 This repository contains code to reproduce the results presented in the paper 
 
-> **Charu V, Liang JW, Chertow GM, Li J, Montez-Rath ME, Geldsetzer, P, de Boer I, Tian Lu, Kurella Tamura M. Heterogeneous treatment effects of intensive glycemic control on kidney microvascular outcomes in ACCORD. 2023.**
+> **Charu V, Liang JW, Chertow GM, Li ZJ, Montez-Rath ME, Geldsetzer, P, de Boer IH, Tian L, Kurella Tamura M. Heterogeneous treatment effects of intensive glycemic control on kidney microvascular outcomes in ACCORD. 2023.**
   
 ## R package dependencies
 - Data wrangling and visualization: [`tidyverse`](https://cran.r-project.org/web/packages/tidyverse/index.html) and [`survminer`](https://cran.r-project.org/web/packages/survminer/index.html)
